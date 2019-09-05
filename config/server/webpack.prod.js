@@ -3,7 +3,7 @@ const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
 const GeneratePackageJson = require("generate-package-json-webpack-plugin");
 
 module.exports = {
-  entry: [Paths.server.root, Paths.packageTemplate],
+  entry: Paths.server.root,
   output: {
     filename: "server.bundle.js",
     path: Paths.dist,
