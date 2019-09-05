@@ -1,10 +1,11 @@
 const Paths = require("../Paths");
 const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
+const GeneratePackageJson = require("generate-package-json-webpack-plugin");
 
 module.exports = {
   entry: [Paths.server.root, Paths.packageTemplate],
   output: {
-    filename: "[name].js",
+    filename: "server.bundle.js",
     path: Paths.dist,
     publicPath: Paths.server.dist
   },
@@ -23,7 +24,24 @@ module.exports = {
       }
     ]
   },
-  plugins: [new WebpackCleanupPlugin()],
+  plugins: [
+    new WebpackCleanupPlugin(),
+    new GeneratePackageJson(
+      {
+        name: "dist",
+        version: "1.0.0",
+        description: "",
+        main: "server.bundle.js",
+        scripts: {
+          start: "node server.bundle.js"
+        },
+        keywords: [],
+        author: "",
+        license: "ISC"
+      },
+      Paths.packageTemplate
+    )
+  ],
   mode: "production",
   target: "node"
 };
