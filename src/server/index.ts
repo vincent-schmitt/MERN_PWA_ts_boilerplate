@@ -39,7 +39,7 @@ module.exports = {
 
 // general CONFIGS
 app.use(json());
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000", optionsSuccessStatus: 200 }));
 app.use(
   urlencoded({
     extended: true

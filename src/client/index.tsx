@@ -14,7 +14,8 @@ const MOUNT_NODE = document.getElementById("app");
 
 ReactDOM.render(
   <BrowserRouter>
-    <GlobalStyles /> <App />
+    <GlobalStyles />
+    <App />
   </BrowserRouter>,
   MOUNT_NODE
 );

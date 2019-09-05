@@ -9,8 +9,10 @@
     "build:client": "webpack --config config/client/webpack.prod.js",
     "dev:server": "webpack --config config/server/webpack.dev.js",
     "build:server": "webpack --config config/server/webpack.prod.js",
+    "build": "npm run build:client && npm run build:server",
     "dev": "npm run dev:client & npm run dev:server",
-    "start": "node dist/server.bundle.js"
+    "start": "node dist/server.bundle.js",
+    "heroku": "npm run build && cd dist && git add . && git commit -am 'changes' && git push heroku master"
   },
   "keywords": [
     "mango",
