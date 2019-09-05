@@ -1,4 +1,4 @@
-const Paths = require("./Paths");
+const Paths = require("../Paths");
 
 // Important modules this config uses
 const HtmlWebpackPlugin = require("html-webpack-plugin");

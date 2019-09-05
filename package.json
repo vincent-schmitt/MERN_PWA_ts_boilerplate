@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev:client": "webpack --watch --config config/webpack.dev.js",
-    "build": "webpack --config config/webpack.prod.js"
+    "dev:client": "webpack --watch --config config/client/webpack.dev.js",
+    "build:client": "webpack --config config/client/webpack.prod.js",
+    "dev:server": "webpack --config config/server/webpack.dev.js",
+    "build:server": "webpack --config config/server/webpack.prod.js",
+    "dev": "npm run dev:client & npm run dev:server",
+    "start": "node dist/server.bundle.js"
   },
   "keywords": [
     "mango",
@@ -21,6 +25,9 @@
   "author": "Vindao (Vincent Schmitt)",
   "license": "MIT",
   "devDependencies": {
+    "@types/body-parser": "^1.17.1",
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.1",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
     "@types/react-loadable": "^5.5.1",
@@ -35,8 +42,11 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "image-webpack-loader": "^6.0.0",
+    "nodemon": "^1.19.2",
+    "nodemon-webpack-plugin": "^4.1.1",
     "offline-plugin": "^5.0.7",
     "react-app-polyfill": "^1.0.2",
+    "source-map-loader": "^0.2.4",
     "style-loader": "^1.0.0",
     "svg-url-loader": "^3.0.2",
     "terser-webpack-plugin": "^1.4.1",
@@ -49,6 +59,11 @@
     "webpack-pwa-manifest": "^4.0.0"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-http-to-https": "^1.1.4",
+    "express-static-gzip": "^2.0.5",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-loadable": "^5.5.0",

@@ -3,6 +3,8 @@ const path = require("path");
 const Client = path.resolve(__dirname, "../", "src/", "client/");
 const Templates = path.join(Client, "templates/");
 
+const server = path.resolve(__dirname, "../", "src/", "server/");
+
 const Dist = path.resolve(__dirname, "../", "dist/");
 
 module.exports = {
@@ -17,8 +19,12 @@ module.exports = {
   },
   config: {
     tsConfig: {
-      client: path.resolve(__dirname, "tsconfig.client.json"),
-      server: path.resolve(__dirname, "tsconfig.server.json")
+      client: path.resolve(__dirname, "client/", "tsconfig.json"),
+      server: path.resolve(__dirname, "server/", "tsconfig.json")
     }
+  },
+  server: {
+    dist: Dist,
+    root: server
   }
 };
