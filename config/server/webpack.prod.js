@@ -1,4 +1,5 @@
 const Paths = require("../Paths");
+const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
 
 module.exports = {
   entry: Paths.server.root,
@@ -22,6 +23,7 @@ module.exports = {
       }
     ]
   },
+  plugins: [new WebpackCleanupPlugin()],
   mode: "production",
   target: "node"
 };
