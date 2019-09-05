@@ -37,7 +37,10 @@ module.exports = {
         },
         keywords: [],
         author: "",
-        license: "ISC"
+        license: "ISC",
+        engines: {
+          node: "<= 6.9.1"
+        }
       },
       Paths.packageTemplate
     )
