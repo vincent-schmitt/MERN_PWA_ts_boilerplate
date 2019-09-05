@@ -27,5 +27,5 @@ module.exports = {
     dist: Dist,
     root: server
   },
-  packageTemplate: path.resolve(__dirname, "templates/", "package.json")
+  packageTemplate: "package.json"
 };
