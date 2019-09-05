@@ -20,7 +20,7 @@ const App: React.SFC<AppProps> = () => {
   };
   return (
     <div>
-      <h1>Tester and the testing world</h1>
+      <h1>Tester</h1>
       <div>
         <button onClick={onClick}>Toggle</button>
       </div>

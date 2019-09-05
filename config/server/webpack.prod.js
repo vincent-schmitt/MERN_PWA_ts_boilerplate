@@ -24,7 +24,24 @@ module.exports = {
       }
     ]
   },
-  plugins: [new WebpackCleanupPlugin()],
+  plugins: [
+    new WebpackCleanupPlugin({ exclude: [".git"] }),
+    new GeneratePackageJson(
+      {
+        name: "dist",
+        version: "1.0.0",
+        description: "",
+        main: "server.bundle.js",
+        scripts: {
+          start: "node server.bundle.js"
+        },
+        keywords: [],
+        author: "",
+        license: "ISC"
+      },
+      Paths.packageTemplate
+    )
+  ],
   mode: "production",
   target: "node"
 };
