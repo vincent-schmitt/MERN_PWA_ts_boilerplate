@@ -28,16 +28,9 @@ module.exports = {
     new WebpackCleanupPlugin(),
     new GeneratePackageJson(
       {
-        name: "dist",
+        name: "MERN_boilerplate",
         version: "1.0.0",
-        description: "",
-        main: "server.bundle.js",
-        scripts: {
-          start: "node server.bundle.js"
-        },
-        keywords: [],
-        author: "",
-        license: "ISC"
+        main: "./server.bundle.js"
       },
       Paths.packageTemplate
     )
