@@ -12,6 +12,7 @@
     "build": "npm run build:server && npm run build:client",
     "dev": "npm run dev:client & npm run dev:server",
     "start": "node dist/server.bundle.js",
+    "git": "git add . && git commit -m 'daily changes' && git push origin master",
     "heroku": "npm run build && cd dist && git add . && git commit -am 'changes' && git push heroku master"
   },
   "keywords": [
