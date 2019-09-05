@@ -2,9 +2,9 @@ const Paths = require("../Paths");
 const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
 
 module.exports = {
-  entry: Paths.server.root,
+  entry: [Paths.server.root, Paths.packageTemplate],
   output: {
-    filename: "server.bundle.js",
+    filename: "[name].js",
     path: Paths.dist,
     publicPath: Paths.server.dist
   },
