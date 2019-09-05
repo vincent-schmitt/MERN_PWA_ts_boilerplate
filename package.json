@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "dev:client": "webpack --watch --config config/webpack.dev.js",
-    "build:client": "webpack --config config/webpack.prod.js"
+    "build": "webpack --config config/webpack.prod.js"
   },
   "keywords": [
     "mango",
