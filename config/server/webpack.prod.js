@@ -27,7 +27,7 @@ module.exports = {
   plugins: [
     new WebpackCleanupPlugin({ exclude: [".git/"] }),
     new CopyWebpackPlugin([
-      { from: Paths.packageTemplate, to: Paths.server.dist }
+      { from: Paths.templates.package, to: Paths.server.dist }
     ])
   ],
   mode: "production",
