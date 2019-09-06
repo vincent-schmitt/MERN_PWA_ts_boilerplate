@@ -1,6 +1,6 @@
 const Paths = require("../Paths");
 const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
-const GeneratePackageJson = require("generate-package-json-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: Paths.server.root,
@@ -24,7 +24,12 @@ module.exports = {
       }
     ]
   },
-  plugins: [new WebpackCleanupPlugin({ exclude: [".git"] })],
+  plugins: [
+    new WebpackCleanupPlugin({ exclude: [".git/"] }),
+    new CopyWebpackPlugin([
+      { from: Paths.packageTemplate, to: Paths.server.dist }
+    ])
+  ],
   mode: "production",
   target: "node"
 };
