@@ -24,12 +24,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new WebpackCleanupPlugin({ exclude: [".git/"] }),
-    new CopyWebpackPlugin([
-      { from: Paths.templates.package, to: Paths.server.dist }
-    ])
-  ],
+  plugins: [new WebpackCleanupPlugin({ exclude: [".git/", "package.json"] })],
   mode: "production",
   target: "node"
 };
