@@ -27,7 +27,16 @@ const pageThemes: ThemesI = {
 };
 
 const ThemeProvider: React.SFC<NavThemeProviderProps> = ({ children }) => {
-  const [current, setCurrent] = React.useState(0);
+  const getInitialTheme = () => {
+    const now = new Date();
+    if (now.getHours() > 17 || now.getHours() < 7) {
+      return 0;
+    } else {
+      return 1;
+    }
+  };
+
+  const [current, setCurrent] = React.useState(getInitialTheme());
 
   const toggle = () => {
     if (current === 0) {

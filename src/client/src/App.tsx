@@ -18,14 +18,14 @@ export interface AppProps {}
 
 const App: React.SFC<AppProps> = () => {
   return (
-    <Page>
-      <ThemeProvider>
+    <ThemeProvider>
+      <Page>
         <Nav />
-      </ThemeProvider>
-      <Switch>
-        <Route exact path="/" component={Home} />
-      </Switch>
-    </Page>
+        <Switch>
+          <Route exact path="/" component={Home} />
+        </Switch>
+      </Page>
+    </ThemeProvider>
   );
 };
 
