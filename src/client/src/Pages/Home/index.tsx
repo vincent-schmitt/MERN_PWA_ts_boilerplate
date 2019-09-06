@@ -6,7 +6,7 @@ export interface HomeProps {}
 
 const Home: React.SFC<HomeProps> = () => {
   return (
-    <Container style={{ textAlign: "center" }}>This is the Home Page</Container>
+    <Container style={{ textAlign: "center" }}>This is the HomePage</Container>
   );
 };
 
