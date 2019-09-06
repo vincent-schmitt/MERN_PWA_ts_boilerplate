@@ -3,6 +3,9 @@ import { Route, Switch } from "react-router-dom";
 
 import LoadableComponent from "./utils/Loadable";
 
+// Providers
+import NavThemeProvider from "./context/Provider/ThemeProvider/NavThemeProvider";
+
 //
 
 import Nav from "./components/Nav";
@@ -16,7 +19,9 @@ export interface AppProps {}
 const App: React.SFC<AppProps> = () => {
   return (
     <Page>
-      <Nav />
+      <NavThemeProvider>
+        <Nav />
+      </NavThemeProvider>
       <Switch>
         <Route exact path="/" component={Home} />
       </Switch>
