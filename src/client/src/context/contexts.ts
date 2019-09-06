@@ -4,9 +4,17 @@ import * as React from "react";
 
 import { darkNav } from "../Theme/custom/Nav";
 import { darkPage } from "../Theme/custom/Page";
+import { LanguageT } from "../types/Language";
 
 export const ToggleThemeContext = React.createContext(() => {});
 
 export const NavThemeContext = React.createContext(darkNav);
 
 export const PageThemeContext = React.createContext(darkPage);
+
+// Language Context
+
+export const LanguageContext = React.createContext({
+  current: "en",
+  update: (lang: LanguageT) => {}
+});

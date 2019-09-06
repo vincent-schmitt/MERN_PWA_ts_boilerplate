@@ -1,18 +1,18 @@
 import * as React from "react";
 
 // types
-import { ThemesI } from "../../../types/Theme";
+import { ThemesI } from "../../types/Theme";
 
 // context
 import {
   ToggleThemeContext,
   NavThemeContext,
   PageThemeContext
-} from "../../contexts";
+} from "../contexts";
 
 // Themes
-import { darkNav, lightNav } from "../../../Theme/custom/Nav";
-import { darkPage, lightPage } from "../../../Theme/custom/Page";
+import { darkNav, lightNav } from "../../Theme/custom/Nav";
+import { darkPage, lightPage } from "../../Theme/custom/Page";
 
 export interface NavThemeProviderProps {}
 

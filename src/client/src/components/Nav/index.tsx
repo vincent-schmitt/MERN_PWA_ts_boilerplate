@@ -1,20 +1,34 @@
 import * as React from "react";
 import styled from "styled-components";
 import Switch from "react-switch";
+import { NavLink } from "react-router-dom";
 
+// helper components
 import UseTheme from "../helpers/ThemeWrapper";
+
+// utils
+import { getImageUrl } from "../../utils/Images/cloudinary";
 
 // context
 import { ToggleThemeContext, NavThemeContext } from "../../context/contexts";
+
+// subComponents
+import LanguagePicker from "./LanguagePicker";
 
 // styles
 
 export interface NavProps {}
 
-const Brand = styled.h1``;
+const Header = styled.header`
+  height: 100%;
+  padding: 0 1em 0 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
-const Label = styled.label`
-  float: right;
+const Brand = styled.h1`
+  height: 50%;
 `;
 
 const Nav: React.SFC<NavProps> = () => {
@@ -28,10 +42,21 @@ const Nav: React.SFC<NavProps> = () => {
   };
   return (
     <UseTheme Theme={Theme}>
-      <header>
-        <Brand>Vindao</Brand>
-        <Label>
+      <Header>
+        <Brand>
+          <NavLink to="/">
+            <img
+              src={getImageUrl("logo-new-03_krbj4b", 3)}
+              alt="Logo"
+              height="100%"
+            />
+          </NavLink>
+        </Brand>
+        <div style={{ display: "flex" }}>
+          <LanguagePicker />
           <Switch
+            height={20}
+            width={45}
             onChange={toggleTheme}
             checked={checked}
             offColor={Theme.color}
@@ -41,8 +66,8 @@ const Nav: React.SFC<NavProps> = () => {
             uncheckedIcon={false}
             checkedIcon={false}
           />
-        </Label>
-      </header>
+        </div>
+      </Header>
     </UseTheme>
   );
 };

@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import LoadableComponent from "./utils/Loadable";
 
 // Providers
-import ThemeProvider from "./context/Provider/ThemeProvider/ThemeProvider";
+import ThemeProvider from "./context/Provider/ThemeProvider";
 
 //
 
@@ -13,18 +13,21 @@ import Page from "./components/Page";
 
 // Pages
 import Home from "./Pages/Home";
+import LanguageContextProvider from "./context/Provider/LanguageProvider";
 
 export interface AppProps {}
 
 const App: React.SFC<AppProps> = () => {
   return (
     <ThemeProvider>
-      <Page>
-        <Nav />
-        <Switch>
-          <Route exact path="/" component={Home} />
-        </Switch>
-      </Page>
+      <LanguageContextProvider>
+        <Page>
+          <Nav />
+          <Switch>
+            <Route exact path="/" component={Home} />
+          </Switch>
+        </Page>
+      </LanguageContextProvider>
     </ThemeProvider>
   );
 };

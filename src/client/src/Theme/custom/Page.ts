@@ -2,12 +2,12 @@ export const darkPage = {
   minHeight: "100vh",
   minWidth: "100vw",
   backgroundSize: "cover",
-  color: "black"
+  backgroundColor: "darkgrey",
+  color: "white"
 };
 
 export const lightPage = {
-  minHeight: "100vh",
-  minWidth: "100vw",
-  backgroundSize: "cover",
-  color: "lightgrey"
+  ...darkPage,
+  backgroundColor: "white",
+  color: "black"
 };
