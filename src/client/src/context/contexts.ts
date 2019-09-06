@@ -1,8 +1,12 @@
 import * as React from "react";
 
-import { DarkNav } from "../Theme/custom/Nav";
+// ThemeContexts
 
-export const NavThemeContext = React.createContext({
-  Theme: DarkNav,
-  toggle: () => {}
-});
+import { darkNav } from "../Theme/custom/Nav";
+import { darkPage } from "../Theme/custom/Page";
+
+export const ToggleThemeContext = React.createContext(() => {});
+
+export const NavThemeContext = React.createContext(darkNav);
+
+export const PageThemeContext = React.createContext(darkPage);

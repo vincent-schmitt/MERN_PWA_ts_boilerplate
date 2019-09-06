@@ -5,14 +5,14 @@ export const Header = styled.header`
   background-color: black;
 `;
 
-export const DarkNav = {
+export const darkNav = {
   height: "10vh",
-  backgroundColor: "black",
-  color: "white"
+  backgroundColor: "#000000",
+  color: "#fff"
 };
 
-export const LightNav = {
+export const lightNav = {
   height: "10vh",
-  backgroundColor: "lightgrey",
-  color: "black"
+  backgroundColor: "#d3d3d3",
+  color: "#000000"
 };

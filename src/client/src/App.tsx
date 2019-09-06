@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import LoadableComponent from "./utils/Loadable";
 
 // Providers
-import NavThemeProvider from "./context/Provider/ThemeProvider/NavThemeProvider";
+import ThemeProvider from "./context/Provider/ThemeProvider/ThemeProvider";
 
 //
 
@@ -19,9 +19,9 @@ export interface AppProps {}
 const App: React.SFC<AppProps> = () => {
   return (
     <Page>
-      <NavThemeProvider>
+      <ThemeProvider>
         <Nav />
-      </NavThemeProvider>
+      </ThemeProvider>
       <Switch>
         <Route exact path="/" component={Home} />
       </Switch>
