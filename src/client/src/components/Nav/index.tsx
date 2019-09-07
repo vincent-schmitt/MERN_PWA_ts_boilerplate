@@ -15,6 +15,9 @@ import { ToggleThemeContext, NavThemeContext } from "../../context/contexts";
 // subComponents
 import LanguagePicker from "./LanguagePicker";
 
+// assets
+const Logo = getImageUrl("logo-new-03_krbj4b", 3);
+
 // styles
 
 export interface NavProps {}
@@ -52,11 +55,7 @@ const Nav: React.SFC<NavProps> = () => {
       <Header>
         <Brand>
           <NavLink to="/">
-            <img
-              src={getImageUrl("logo-new-03_krbj4b", 3)}
-              alt="Logo"
-              height="100%"
-            />
+            <img src={Logo} alt="Logo" height="100%" />
           </NavLink>
         </Brand>
         <div style={{ display: "flex" }}>

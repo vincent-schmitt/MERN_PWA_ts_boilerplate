@@ -1,14 +1,12 @@
 const Paths = require("../Paths");
 
-// Important modules this config uses
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const OfflinePlugin = require("offline-plugin");
-const { HashedModuleIdsPlugin } = require("webpack");
-const TerserPlugin = require("terser-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
-const nodeExternals = require("webpack-node-externals");
+const TerserPlugin = require("terser-webpack-plugin");
+
 module.exports = {
   mode: "production",
 
@@ -19,11 +17,11 @@ module.exports = {
     filename: "[name].[chunkhash].js",
     chunkFilename: "[name].[chunkhash].chunk.js"
   },
-
   optimization: {
     minimize: true,
     minimizer: [
       new TerserPlugin({
+        exclude: /node_modules/,
         terserOptions: {
           warnings: false,
           compress: {
@@ -38,7 +36,7 @@ module.exports = {
         },
         parallel: true,
         cache: true,
-        sourceMap: true
+        sourceMap: false
       })
     ],
     nodeEnv: "production",
@@ -48,18 +46,7 @@ module.exports = {
     splitChunks: {
       chunks: "all",
       maxInitialRequests: 10,
-      minSize: 0,
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name(module) {
-            const packageName = module.context.match(
-              /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-            )[1];
-            return `npm.${packageName.replace("@", "")}`;
-          }
-        }
-      }
+      minSize: 0
     }
   },
   module: {
@@ -71,77 +58,9 @@ module.exports = {
         options: {
           configFile: Paths.config.tsConfig.client
         }
-      },
-      {
-        // Preprocess 3rd party .css files located in node_modules
-        test: /\.css$/,
-        include: /node_modules/,
-        use: ["style-loader", "css-loader"]
-      },
-      {
-        test: /\.(eot|otf|ttf|woff|woff2)$/,
-        use: "file-loader"
-      },
-      {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: "svg-url-loader",
-            options: {
-              // Inline files smaller than 10 kB
-              limit: 10 * 1024,
-              noquotes: true
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(jpg|png|gif)$/,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              // Inline files smaller than 10 kB
-              limit: 10 * 1024
-            }
-          },
-          {
-            loader: "image-webpack-loader",
-            options: {
-              mozjpeg: {
-                enabled: true,
-                progressive: true
-              },
-              gifsicle: {
-                interlaced: false
-              },
-              optipng: {
-                optimizationLevel: 7
-              },
-              pngquant: {
-                quality: "65-90",
-                speed: 4
-              }
-            }
-          }
-        ]
-      },
-      {
-        test: /\.html$/,
-        use: "html-loader"
-      },
-      {
-        test: /\.(mp4|webm)$/,
-        use: {
-          loader: "url-loader",
-          options: {
-            limit: 10000
-          }
-        }
       }
     ]
   },
-
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json", ".jsx"]
   },
@@ -217,12 +136,6 @@ module.exports = {
           ios: true
         }
       ]
-    }),
-
-    new HashedModuleIdsPlugin({
-      hashFunction: "sha256",
-      hashDigest: "hex",
-      hashDigestLength: 20
     })
   ]
 };
