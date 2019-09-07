@@ -8,6 +8,7 @@ const { HashedModuleIdsPlugin } = require("webpack");
 const TerserPlugin = require("terser-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
+const nodeExternals = require("webpack-node-externals");
 module.exports = {
   mode: "production",
 
@@ -41,7 +42,7 @@ module.exports = {
       })
     ],
     nodeEnv: "production",
-    sideEffects: true,
+    sideEffects: false,
     concatenateModules: true,
     runtimeChunk: "single",
     splitChunks: {
@@ -61,12 +62,11 @@ module.exports = {
       }
     }
   },
-
   module: {
     rules: [
       {
         test: /\.(tsx?|jsx?)$/,
-        exclude: [/node_modules/],
+        exclude: /node_modules/,
         loader: "ts-loader",
         options: {
           configFile: Paths.config.tsConfig.client
@@ -109,11 +109,8 @@ module.exports = {
             loader: "image-webpack-loader",
             options: {
               mozjpeg: {
-                enabled: false
-                // NOTE: mozjpeg is disabled as it causes errors in some Linux environments
-                // Try enabling it in your environment by switching the config to:
-                // enabled: true,
-                // progressive: true,
+                enabled: true,
+                progressive: true
               },
               gifsicle: {
                 interlaced: false
