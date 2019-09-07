@@ -71,6 +71,8 @@ const Nav: React.SFC<NavProps> = () => {
             offHandleColor={Theme.backgroundColor}
             uncheckedIcon={false}
             checkedIcon={false}
+            aria-labelledby="switch between dark and light theme"
+            aria-labels="switch"
           />
         </div>
       </Header>

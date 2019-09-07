@@ -1,14 +1,13 @@
 const Paths = require("../Paths");
 
-const RobotstxtPlugin = require("robotstxt-webpack-plugin");
+// Important modules this config uses
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const OfflinePlugin = require("offline-plugin");
+const { HashedModuleIdsPlugin } = require("webpack");
+const TerserPlugin = require("terser-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
-const SiteMapPlugin = require("sitemap-webpack-plugin").default;
-
 module.exports = {
   mode: "production",
 
@@ -19,6 +18,7 @@ module.exports = {
     filename: "[name].[chunkhash].js",
     chunkFilename: "[name].[chunkhash].chunk.js"
   },
+
   optimization: {
     minimize: true,
     minimizer: [
@@ -48,7 +48,18 @@ module.exports = {
     splitChunks: {
       chunks: "all",
       maxInitialRequests: 10,
-      minSize: 0
+      minSize: 0,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            const packageName = module.context.match(
+              /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+            )[1];
+            return `npm.${packageName.replace("@", "")}`;
+          }
+        }
+      }
     }
   },
   module: {
@@ -60,9 +71,81 @@ module.exports = {
         options: {
           configFile: Paths.config.tsConfig.client
         }
+      },
+      {
+        test: /\.(eot|otf|ttf|woff|woff2)$/,
+        exclude: /node_modules/,
+
+        use: "file-loader"
+      },
+      {
+        test: /\.svg$/,
+        exclude: /node_modules/,
+
+        use: [
+          {
+            loader: "svg-url-loader",
+            options: {
+              // Inline files smaller than 10 kB
+              limit: 10 * 1024,
+              noquotes: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(jpg|png|gif)$/,
+        exclude: /node_modules/,
+
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              // Inline files smaller than 10 kB
+              limit: 10 * 1024
+            }
+          },
+          {
+            loader: "image-webpack-loader",
+            options: {
+              mozjpeg: {
+                enabled: true,
+                progressive: true
+              },
+              gifsicle: {
+                interlaced: false
+              },
+              optipng: {
+                optimizationLevel: 7
+              },
+              pngquant: {
+                quality: "65-90",
+                speed: 4
+              }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.html$/,
+        exclude: /node_modules/,
+
+        use: "html-loader"
+      },
+      {
+        test: /\.(mp4|webm)$/,
+        exclude: /node_modules/,
+
+        use: {
+          loader: "url-loader",
+          options: {
+            limit: 10000
+          }
+        }
       }
     ]
   },
+
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json", ".jsx"]
   },
@@ -139,33 +222,11 @@ module.exports = {
         }
       ]
     }),
-    new SiteMapPlugin("http://sabali.herokuapp.com", [
-      "http://sabali.herokuapp.com"
-    ]),
-    new RobotstxtPlugin({
-      policy: [
-        {
-          userAgent: "Googlebot",
-          allow: "/",
-          disallow: "/search",
-          crawlDelay: 2
-        },
-        {
-          userAgent: "OtherBot",
-          allow: ["/allow-for-all-bots", "/allow-only-for-other-bot"],
-          disallow: ["/admin", "/login"],
-          crawlDelay: 2
-        },
-        {
-          userAgent: "*",
-          allow: "/",
-          disallow: "/search",
-          crawlDelay: 10,
-          cleanParam: "ref /articles/"
-        }
-      ],
-      sitemap: "http://sabali.herokuapp.com/sitemap.xml",
-      host: "http://sabali.herokuapp.com"
+
+    new HashedModuleIdsPlugin({
+      hashFunction: "sha256",
+      hashDigest: "hex",
+      hashDigestLength: 20
     })
   ]
 };
