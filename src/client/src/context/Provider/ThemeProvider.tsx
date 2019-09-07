@@ -47,7 +47,7 @@ const ThemeProvider: React.SFC<NavThemeProviderProps> = ({ children }) => {
   };
 
   return (
-    <ToggleThemeContext.Provider value={toggle}>
+    <ToggleThemeContext.Provider value={{ toggle: toggle, current: current }}>
       <NavThemeContext.Provider value={navThemes[current]}>
         <PageThemeContext.Provider value={pageThemes[current]}>
           {children}

@@ -6,7 +6,10 @@ import { darkNav } from "../Theme/custom/Nav";
 import { darkPage } from "../Theme/custom/Page";
 import { LanguageT } from "../types/Language";
 
-export const ToggleThemeContext = React.createContext(() => {});
+export const ToggleThemeContext = React.createContext({
+  toggle: () => {},
+  current: 0
+});
 
 export const NavThemeContext = React.createContext(darkNav);
 

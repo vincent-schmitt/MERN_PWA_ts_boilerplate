@@ -31,13 +31,20 @@ const Brand = styled.h1`
   height: 50%;
 `;
 
+const getChecked = (current: number) => {
+  if (current === 0) {
+    return false;
+  }
+  return true;
+};
+
 const Nav: React.SFC<NavProps> = () => {
   const Theme = React.useContext(NavThemeContext);
   const Toggle = React.useContext(ToggleThemeContext);
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(getChecked(Toggle.current));
 
   const toggleTheme = () => {
-    Toggle();
+    Toggle.toggle();
     setChecked(!checked);
   };
   return (
